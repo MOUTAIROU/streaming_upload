@@ -1,0 +1,375 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+}
+
+.main{
+    display: flex;
+    width: 100%;
+}
+
+.mainSidebar{
+    width: 20%;
+    background: #2C3E50;
+    min-height: 100vh;
+}
+
+.mainContainer{
+    width: 80%;
+    background: #F4F6F6;
+    padding: 20px;
+}
+
+.mainContainer h2{
+    text-align: center;
+}
+
+.sidebarContent{
+    padding: 20px 0px;   
+}
+.formContainer{
+    margin: auto;
+    width: 80%;  
+}
+
+.formContainer .film-prolfile {
+    height: 300px;
+    width: 185px;
+    background-color: #b9b7b7;
+    border-radius: 5px;
+    margin: 10px auto;
+}
+
+.formContainer .film-prolfile2{
+    height: 300px;
+    width: 80%;
+    background-color: #b9b7b7;
+    border-radius: 5px;
+    margin: 10px auto;
+}
+.formContainer .film-prolfile .preview{
+    border-radius: 5px;
+}
+
+.sidebarContent ul{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;  
+}
+
+.sidebarContent ul li{
+    padding: 20px;
+    color: white;  
+    cursor: pointer;
+}
+
+.sidebarContent ul li:hover{
+    background: #007474;
+}
+h2 {
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+a.button:hover {
+    background-color: #218838;
+}
+
+video {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+
+.loader-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+.list-img123{
+    display: flex;
+}
+
+.list-img124{
+    width: 80%;
+    margin: 5px;
+}
+
+.list-img125{
+    width: 20%;
+    margin: 5px;  
+}
+.preview1_color{
+    background-color: rgb(148, 147, 147);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #0056b3;
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #28a745;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.download-btn:hover {
+    background-color: #218838;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin: 0px auto;
+    width: 50%;
+}
+
+.custom-file-upload:hover {
+    background-color: #0056b3;
+}
+
+.custom-file-upload input {
+    display: none;
+}
+
+.custom-imput-content{
+padding: 10px 30px;
+}
+
+.custom-imput-content label{
+    padding-bottom: 10px;
+}
+
+.custom-imput-content input,.custom-imput-content textarea{
+    width: 94%;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.custom-imput-content textarea{
+    max-width: 397px;
+    margin-top: 10px;
+}
+
+.close,.closeActeur{
+    background-color: #252525;
+    padding: 3px 13px;
+    border-radius: 30px;
+    font-size: 31px;
+    color: #c4ebf7;
+    cursor: pointer;
+}
+
+.modal-title {
+text-align: center;
+padding: 10px;
+font-weight: 700;
+text-transform: uppercase;
+font-size: 23px;
+color: #0006f7;
+}
+
+.modal-form{
+ gap:0px !important;
+}
+ 
+.preview1{
+    height: 300px;
+    width: 185px;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+}
+
+.preview2{
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+}
+
+.preview3{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+}
+.film-prolfile12{
+    height: 300px;
+    width: 80%;
+    background-color: #b9b7b7;
+    border-radius: 5px;
+    margin: 10px auto;
+}
+
+.preview12 {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+}
+.preview{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 500px;  
+    object-position: center;
+    overflow: hidden;
+}
+
+.realisateur-item img,.acteurs-item img{
+    height: 100px;
+    width: 100px; 
+}
+
+.realisateur-container,.acteurs-container {
+    display: flex;   
+    padding: 20px;
+}
+
+.film-prolfile{
+  height: 100px;
+width: 100px;
+background-color: #b9b7b7;
+border-radius: 500px;
+margin: 10px auto;  
+}
+
+.formContainer .filmDescription{
+    max-width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-family: sans-serif;
+
+}
+
+.formContainer .film-prolfile-acteur{
+    height: 300px;
+    width: 300px;
+    background-color: #b9b7b7;
+    border-radius: 500px;
+    margin: 10px auto;
+}
+
+.formContainerSelect{
+    height: 40px !important;
+}
+
+.sceneContainer{
+    display: flex;
+}
+
+.sceneContent{
+    padding-right: 28px;
+    margin-bottom: 30px;
+}
+
+.sceneContent div{
+    padding-bottom: 11px;
+}

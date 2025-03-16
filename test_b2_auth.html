@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Authentification Backblaze B2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        pre {
+            text-align: left;
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Test d'Authentification B2</h1>
+
+    <script>
+
+             fetch("http://localhost/serverUpload/b2auth.php")
+            .then(response => response.json())
+            .then(data => console.log("Token :", data.authorizationToken))
+            .catch(error => console.error("Erreur :", error));
+    </script>
+
+</body>
+
+</html>
