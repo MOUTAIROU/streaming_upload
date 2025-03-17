@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-   
+<?php
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,12 +43,18 @@
 
 
     <script>
+
+
+const myVar = <?php echo json_encode($myVar); ?>;
+
+
+
    
    async function fetchActeurs() {
 
       
         try {
-            const response = await fetch("http://localhost:8090/serie/getserielisteanime", {
+            const response = await fetch(`${myVar}/serie/getserielisteanime`, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
@@ -97,9 +105,11 @@ function afficherActeurs(acteurs) {
                                      `;
                 }
 
+                
+                
                 listItem.innerHTML = `
                     <div class="acteurs-container">
-                     <div class="acteurs-item"><img src="http://localhost:8090/${acteur.image}" alt="${acteur.titre}" class="realisateur-image"></div>
+                     <div class="acteurs-item"><img src="${myVar}/${acteur.image}" alt="${acteur.titre}" class="realisateur-image"></div>
                      <div class="acteurs-info">
                      <h3> Nom : ${acteur.titre}</h3>
                      <h3> Date d'enrehistrement : ${acteur.create_at}</h3>
@@ -144,7 +154,7 @@ function afficherActeurs(acteurs) {
             
             
             try {
-                const response = await fetch("http://localhost:8090/serie/searchserieanime", {
+                const response = await fetch(`${myVar}/serie/searchserieanime`, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",

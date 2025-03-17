@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
    
+<?php
+ $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,6 +36,8 @@
 
     <script>
    
+   const myVar = <?php echo json_encode($myVar); ?>;
+
    async function fetchActeurs() {
 
             // Récupérer l'ID du film depuis l'URL
@@ -45,7 +51,7 @@
 
 
         try {
-            const response = await fetch("http://localhost:8090/serie/get_episode_saison", {
+            const response = await fetch(`${myVar}/serie/get_episode_saison`, {
                 method: "POST",
                 headers: {
                     "Accept": "application/json",
@@ -60,7 +66,6 @@
 
             const data = await response.json(); // Convertir la réponse en JSON
 
-            console.log(data.message)
 
             acteurUsersLists = data.message
             // Afficher les acteurs sur la page
@@ -72,8 +77,6 @@
 }
 
 function afficherActeurs(acteurs) {
-
-           console.log(acteurs)
 
             let acteursContainer = document.getElementById("acteursContainer");
             acteursContainer.innerHTML = ""; // Vider la liste précédente

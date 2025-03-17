@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<?php
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enregistrer un film</title>
@@ -125,6 +128,8 @@
     <script>
         $(document).ready( function() {
 
+            const myVar = <?php echo json_encode($myVar); ?>;
+
             async function fetchActeurs() {     
 
                 // Récupérer l'ID du film depuis l'URL
@@ -132,7 +137,7 @@
                         const filmID = urlParams.get("filmID");
 
                 try {
-                const response = await fetch("http://localhost:8090/film/getfilmscene", {
+                const response = await fetch(`${myVar}/film/getfilmscene`, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
@@ -217,7 +222,7 @@
                 const filmID = urlParams.get("filmID");
 
             try {
-                const response = await fetch("http://localhost:8090/film/changefilmscene", {
+                const response = await fetch(`${myVar}/film/changefilmscene`, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",

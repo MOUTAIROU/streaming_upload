@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
+
+<?php
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
    
 <head>
     <meta charset="UTF-8">
@@ -50,7 +54,7 @@
 
     <script>
 
-
+const myVar = <?php echo json_encode($myVar); ?>;
                     // Récupérer l'ID du film depuis l'URL
                     const urlParams = new URLSearchParams(window.location.search);
                     const filmID = urlParams.get("filmID");
@@ -69,7 +73,7 @@
                                 const filmID = urlParams.get("filmID");
 
                         try {
-                            const response = await fetch("http://localhost:8090/film/getfilmrealisateur", {
+                            const response = await fetch(`${myVar}/film/getfilmrealisateur`, {
                                 method: "POST",
                                 headers: {
                                     "Accept": "application/json",
@@ -86,11 +90,9 @@
 
                             acteurUsersLists = data.message
 
-                            console.log(data.message[0])
-
                             document.getElementById("filmName").value = data.message[0].nom || "";
                             document.getElementById("filmDescription").value =  data.message[0].biographie || "";
-                            document.getElementById("filmPreview").src =  "http://localhost:8090/"+data.message[0].image;
+                            document.getElementById("filmPreview").src =  myVar+"/"+data.message[0].image;
                             document.getElementById("filmPreview").style.display = "block";
 
                             // Afficher les acteurs sur la page
@@ -131,7 +133,7 @@
                    
 
                     try {
-                    let response = await fetch("http://localhost:8090/film/changefilmrealisateur", {
+                    let response = await fetch(`${myVar}/film/changefilmrealisateur`, {
                     method: "POST",
                     body: formData
                     });

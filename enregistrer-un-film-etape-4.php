@@ -1,6 +1,9 @@
 
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -124,6 +127,9 @@
     
     <script>
         $(document).ready( function() {
+
+            const myVar = <?php echo json_encode($myVar); ?>;
+
             $('#filmForm').on('submit',  async function(event) {
                 event.preventDefault();
 
@@ -159,7 +165,7 @@
                     const filmID = urlParams.get("filmID");
 
             try {
-                const response = await fetch("http://localhost:8090/film/filmscene", {
+                const response = await fetch(`${myVar}/film/filmscene`, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",

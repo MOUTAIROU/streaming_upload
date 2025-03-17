@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-   
+<?php
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,6 +81,8 @@
 
     <script>
 
+const myVar = <?php echo json_encode($myVar); ?>;
+
         let realisateurs = {} ; // Tableau pour stocker les réalisateurs
         let acteurUsersLists = []
 
@@ -131,7 +135,7 @@
                     const filmID = urlParams.get("filmID");
 
             try {
-                const response = await fetch("http://localhost:8090/film/getfilmacteur", {
+                const response = await fetch(`${myVar}/film/getfilmacteur`, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
@@ -163,7 +167,7 @@
        if (confirm("Voulez-vous vraiment supprimer ce film ?")) {
 
        try {
-               const response = await fetch("http://localhost:8090/film/delete_acteur", {
+               const response = await fetch(`${myVar}/film/delete_acteur`, {
                    method: "POST",
                    headers: {
                        "Accept": "application/json",
@@ -197,7 +201,7 @@
 
                 listItem.innerHTML = `
                     <div class="acteurs-container">
-                     <div class="acteurs-item"><img src="http://localhost:8090/${acteur.image}" alt="${acteur.nom}" class="realisateur-image"></div>
+                     <div class="acteurs-item"><img src="${myVar}/${acteur.image}" alt="${acteur.nom}" class="realisateur-image"></div>
                      <div class="acteurs-info">
                     <h3>${acteur.nom}  <span onclick="supprimerProfile('${acteur.id}')">Suprimer le profile</span></h3>
                     <p>${acteur.biographie}</p>
@@ -254,7 +258,7 @@
                    
 
                     try {
-                    let response = await fetch("http://localhost:8090/film/filmacteur", {
+                    let response = await fetch(`${myVar}/film/filmacteur`, {
                     method: "POST",
                     body: formData
                     });

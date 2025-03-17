@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-   
+<?php
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,7 +98,7 @@
 
     <script>
 
-        
+const myVar = <?php echo json_encode($myVar); ?>;
         async function fetchActeurs() {
 
         // Récupérer l'ID du film depuis l'URL
@@ -109,7 +111,7 @@
         console.log(filmID,saisson,episode,title)
 
         try {
-        const response = await fetch("http://localhost:8090/serie/getseriesaison", {
+        const response = await fetch(`${myVar}/serie/getseriesaison`, {
         method: "POST",
         headers: {
         "Accept": "application/json",
@@ -129,7 +131,7 @@
         document.getElementById("filmNote").value = data.message[0].note|| "";
         document.getElementById("filmDescription").value = data.message[0].description || "";
         document.getElementById('langue').value = data.message[0].langue
-        document.getElementById("filmPreview").src =  "http://localhost:8090/"+data.message[0].image;
+        document.getElementById("filmPreview").src =  myVar+"/"+data.message[0].image;
         document.getElementById("filmPreview").style.display = "block";
 
         const tableau = data.message[0].scene.split(',');
@@ -199,7 +201,7 @@
                    
                    
                     try {
-                    let response = await fetch("http://localhost:8090/serie/updatecreateserie", {
+                    let response = await fetch(`${myVar}/serie/updatecreateserie`, {
                     method: "POST",
                     body: formData
                     });

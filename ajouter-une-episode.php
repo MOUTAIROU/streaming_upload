@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
+
+<?php
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
    
 <head>
     <meta charset="UTF-8">
@@ -43,11 +47,15 @@
 
     <script>
    
+   const myVar = <?php echo json_encode($myVar); ?>;
+
+
+
    async function fetchActeurs() {
 
       
         try {
-            const response = await fetch("http://localhost:8090/serie/getserieliste", {
+            const response = await fetch(`${myVar}/serie/getserieliste`, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
@@ -100,7 +108,7 @@ function afficherActeurs(acteurs) {
 
                 listItem.innerHTML = `
                     <div class="acteurs-container">
-                     <div class="acteurs-item"><img src="http://localhost:8090/${acteur.image}" alt="${acteur.titre}" class="realisateur-image"></div>
+                     <div class="acteurs-item"><img src="${myVar}/${acteur.image}" alt="${acteur.titre}" class="realisateur-image"></div>
                      <div class="acteurs-info">
                      <h3> Nom : ${acteur.titre}</h3>
                      <h3> Date d'enrehistrement : ${acteur.create_at}</h3>
@@ -145,7 +153,7 @@ function afficherActeurs(acteurs) {
 
             
             try {
-                const response = await fetch("http://localhost:8090/serie/searchseriefilm", {
+                const response = await fetch(`${myVar}/serie/searchseriefilm`, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",

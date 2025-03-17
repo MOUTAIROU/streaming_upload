@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-   
+  
+<?php
+ $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +53,7 @@
 
 
     <script>
-
+const myVar = <?php echo json_encode($myVar); ?>;
         
                 // Récupérer l'ID du film depuis l'URL
                 const urlParams = new URLSearchParams(window.location.search);
@@ -71,7 +75,7 @@
 
       
                         try {
-                            const response = await fetch("http://localhost:8090/serie/getSaison", {
+                            const response = await fetch(`${myVar}/serie/getSaison`, {
                                 method: "POST",
                                 headers: {
                                     "Accept": "application/json",
@@ -91,7 +95,7 @@
                                 // Récupération du paramètre "nom" et insertion dans l'input
                                 document.getElementById("seasonDate").value = data.message[0].seasonDate || "";
                                 document.getElementById("filmName").value = data.message[0].numero || "";
-                                document.getElementById("filmPreview").src =  "http://localhost:8090/"+data.message[0].image;
+                                document.getElementById("filmPreview").src =  myVar+"/"+data.message[0].image;
                                 document.getElementById("filmPreview").style.display = "block";
                         
                             // Afficher les acteurs sur la page
@@ -124,7 +128,7 @@
                    
                     
                     try {
-                    let response = await fetch("http://localhost:8090/serie/createsaison", {
+                    let response = await fetch(`${myVar}/serie/createsaison`, {
                     method: "POST",
                     body: formData
                     });

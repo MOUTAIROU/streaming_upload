@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+?>
    
 <head>
     <meta charset="UTF-8">
@@ -84,7 +87,7 @@
 
     <script>
 
-
+const myVar = <?php echo json_encode($myVar); ?>;
                     // Récupérer l'ID du film depuis l'URL
                     const urlParams = new URLSearchParams(window.location.search);
                     const filmID = urlParams.get("filmID");
@@ -99,9 +102,9 @@
                     document.getElementById("filmName").value = title || "";
                     document.getElementById("filmDescription").value = des || "";
                     document.getElementById('genre').value = categorie || ""
-                    document.getElementById("filmPreview").src =  "http://localhost:8090/"+image;
+                    document.getElementById("filmPreview").src =  myVar+"/"+image;
                     document.getElementById("filmPreview").style.display = "block";
-                    document.getElementById("filmPreview2").src =  "http://localhost:8090/"+image2;
+                    document.getElementById("filmPreview2").src =  myVar+"/"+image2;
                     document.getElementById("filmPreview2").style.display = "block";
 
 
@@ -130,7 +133,7 @@
             formData.append("file2", document.getElementById("image2").files[0]);
 
             try {
-                let response = await fetch("http://localhost:8090/film/changefilm", {
+                let response = await fetch(`${myVar}/film/changefilm`, {
                     method: "POST",
                     body: formData
                 });
