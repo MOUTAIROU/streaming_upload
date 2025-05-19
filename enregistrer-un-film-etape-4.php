@@ -182,8 +182,7 @@ $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
 
                 const {data} = resutat.message
 
-                console.log(data)
-                window.location.href = "upload_film.php?filmID=" +filmID + "&title="+data.titre;
+                window.location.href = "http://localhost/serverUpload/upload_film.php?filmID=" +filmID + "&title="+data.titre;
 
                 
 

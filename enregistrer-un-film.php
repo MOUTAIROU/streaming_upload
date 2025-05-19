@@ -62,7 +62,7 @@ $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
                     <option value="">Choisir la Catégorie</option>
 
                     <option value="moments en famille">moments en famille </option>
-                    <option value="Voyages epiques"> Voyages épiques</option>
+                    <option value="Voyages epiques">Voyages épiques</option>
                     <option value="actions palpitantes">actions palpitantes</option>
                     <option value="frissons assures">frissons assurés</option>
                     <option value="affaires enigmatiques">affaires énigmatiques</option>
@@ -121,6 +121,8 @@ $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
 
                 if (response.ok) {
                     let result = await response.json();
+
+                    console.log(result.status)
 
                     if (result.status == 200) {
                       window.location.href = "enregistrer-un-film-etape-2.php?filmID=" + result.message.id;

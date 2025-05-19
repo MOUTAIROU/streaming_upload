@@ -1,5 +1,7 @@
 <?php
 
+$myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $uploadDir = "uploads/";
     $outputDir = "output_hls/";
@@ -10,6 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fileInfo = pathinfo($_FILES["video"]["name"]);
     $fileExtension = strtolower($fileInfo['extension']);
     $allowedExtensions = ['mp4', 'm4v', 'webm', 'ogg', 'mkv'];
+
+    if (!isset($_FILES["video"]) || $_FILES["video"]["error"] !== UPLOAD_ERR_OK) {
+        die("Erreur lors de l'upload du fichier : " . $_FILES["video"]["error"]);
+    }
     
     if (!in_array($fileExtension, $allowedExtensions)) {
         die("Format de fichier non autorisé.");
@@ -37,7 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!is_dir($outputDir)) mkdir($outputDir, 0777, true);
     
     $videoPath = $uploadDir . basename($_FILES["video"]["name"]);
-    move_uploaded_file($_FILES["video"]["tmp_name"], $videoPath);
+    if (!move_uploaded_file($_FILES["video"]["tmp_name"], $videoPath)) {
+        die("Erreur lors du déplacement du fichier !");
+    }
     $outputPath = $outputDir . "index.m3u8";
 
     
@@ -94,6 +102,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <script>
         document.getElementById("uploadB2").addEventListener("click", async function() {
+
+            const myVar = <?php echo json_encode($myVar); ?>;
+
             const filePath = "<?= $outputPath ?>";
             const fileName = "<?= basename($outputPath) ?>";
             
@@ -230,10 +241,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                 const urlParams = new URLSearchParams(window.location.search);
                                 const filmID = urlParams.get("filmID");
+                               
+                                window.location.href = "http://localhost:3040/set_serie?filmID=" +filmID + "&hlsFolder="+hlsFolder+"&type=Serie&season=" +season+ "&episode="+episode;
 
-
-                                try {
-                                    const response = await fetch("http://localhost:8090/serie/serieurl", {
+                                 /*
+                                  try {
+                                    const response = await fetch(`${myVar}/serie/serieurl`, {
                                     method: "POST",
                                     headers: {
                                         "Accept": "application/json",
@@ -263,16 +276,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                                     } catch (error) {
                                         console.error("Erreur :", error);
-                                    }
+                                    } 
+                                    */
 
 
                                 }else{
+                                    
 
                                 const urlParams = new URLSearchParams(window.location.search);
                                 const filmID = urlParams.get("filmID");
 
+                               
+                                window.location.href = "http://localhost:3040/set_film?filmID=" +filmID + "&hlsFolder="+hlsFolder+"&type=Film";
+ 
+                                /*
+                               
                                 try {
-                                const response = await fetch("http://localhost:8090/film/filmsurl", {
+                                const response = await fetch(`${myVar}/film/filmsurl`, {
                                     method: "POST",
                                     headers: {
                                         "Accept": "application/json",
@@ -301,6 +321,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 } catch (error) {
                                 console.error("Erreur :", error);
                                 }
+
+                                */
+                                
 
                     }
 

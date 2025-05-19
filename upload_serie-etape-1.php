@@ -149,7 +149,7 @@ const myVar = <?php echo json_encode($myVar); ?>;
 
                     if(result.status == 200){
 
-                         window.location.href = `upload_serie.php?filmID=${getQueryParam("filmID")}&saison=${season}&episode=${episode}&titre=${title}`;
+                         window.location.href = `http://localhost/serverUpload/upload_serie.php?filmID=${getQueryParam("filmID")}&saison=${season}&episode=${episode}&titre=${title}`;
 
                     }
                     } else {
