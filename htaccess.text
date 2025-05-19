@@ -1,2 +1,2 @@
-SetEnv NOM_VARIABLE "http://localhost:8090"
+SetEnv NOM_VARIABLE "https://cdn2.belleckflix.com"
 SetEnv DATABASE_HOST "localhost"

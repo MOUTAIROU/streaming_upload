@@ -78,9 +78,42 @@ const myVar = <?php echo json_encode($myVar); ?>;
 
 }
 
+async function supprimerFilm(film) {
+    
+    alert(film)
+       
+       if (confirm("Voulez-vous vraiment supprimer ce film ?")) {
+
+       try {
+               const response = await fetch(`${myVar}/serie/delete_serie`, {
+                   method: "POST",
+                   headers: {
+                       "Accept": "application/json",
+                       "Content-Type": "application/json"
+                   },
+                   body: JSON.stringify({ filmID:film }) 
+               });
+
+               if (!response.ok) {
+                   throw new Error("Erreur lors de la récupération des acteurs !");
+               }
+
+               alert("Le film a été supprimé avec succès !")
+               
+
+           } catch (error) {
+               console.error("Erreur :", error);
+           }
+
+       
+       }
+           
+       
+}  
+
+
 function afficherActeurs(acteurs) {
 
-           console.log(acteurs)
 
             let acteursContainer = document.getElementById("acteursContainer");
             acteursContainer.innerHTML = ""; // Vider la liste précédente
@@ -119,6 +152,7 @@ function afficherActeurs(acteurs) {
                     <div class="acteurs-container-liste-a">
                    
                        <a href ="ajouter-une-saison.php?filmID=${acteur.serie_id}">Ajouter une saison<a/>
+                       <span onclick="supprimerFilm('${acteur.serie_id}')">Suprimer la serie <span/>
                        <a href ="enregistrer-une-serie-modifer.php?filmID=${acteur.serie_id}">Modifier la serie <a/>
                        <a href ="enregistrer-un-film-etape-3.php?filmID=${acteur.serie_id}">Les acteurs <a/>
                        <a href ="enregistrer-un-realisateur-modifier.php?filmID=${acteur.serie_id}"> Le realisateur <a/>

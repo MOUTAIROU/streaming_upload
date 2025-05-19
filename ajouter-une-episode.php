@@ -80,6 +80,38 @@ $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
 
 }
 
+async function supprimerFilm(film) {
+    
+   
+       if (confirm("Voulez-vous vraiment supprimer ce film ?")) {
+
+       try {
+               const response = await fetch(`${myVar}/serie/delete_serie`, {
+                   method: "POST",
+                   headers: {
+                       "Accept": "application/json",
+                       "Content-Type": "application/json"
+                   },
+                   body: JSON.stringify({ filmID:film }) 
+               });
+
+               if (!response.ok) {
+                   throw new Error("Erreur lors de la récupération des acteurs !");
+               }
+
+               alert("La serie a été supprimé avec succès !")
+               
+
+           } catch (error) {
+               console.error("Erreur :", error);
+           }
+
+       
+       }
+           
+       
+} 
+
 function afficherActeurs(acteurs) {
 
 
@@ -121,6 +153,7 @@ function afficherActeurs(acteurs) {
                        <a href ="enregistrer-une-serie-modifer.php?filmID=${acteur.serie_id}">Modifier la serie <a/>
                        <a href ="enregistrer-un-film-etape-3.php?filmID=${acteur.serie_id}">Les acteurs <a/>
                        <a href ="enregistrer-un-realisateur-modifier.php?filmID=${acteur.serie_id}"> Le realisateur <a/>
+                       <span onclick="supprimerFilm('${acteur.serie_id}')">Suprimer la serie <span/>
                                      
                     </div>
                     </div>
