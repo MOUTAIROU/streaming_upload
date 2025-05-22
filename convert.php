@@ -1,6 +1,10 @@
 <?php
 
+set_time_limit(0);
+
 $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
+
+$successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $uploadDir = "uploads/";
@@ -130,12 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 season = season.replace(/<\/?br\s*\/?>/g, "").replace(/\s+/g, "").trim();
                 episode = episode.replace(/<\/?br\s*\/?>/g, "").replace(/\s+/g, "").trim();
 
-                console.log("Type:", isFilm ? "Film" : "Série");
-                console.log("Film Name:",  nettoyerTitre(filmName));
-                console.log("Serie Name:", nettoyerTitre(serieName));
-                console.log("Season:", season);
-                console.log("Episode:", episode);
-
+               
 
                 // Définir le chemin HLS correct
                 let hlsFolder = isFilm 
@@ -154,6 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  
                 // Étape 1 : Récupérer authToken et apiUrl
                 let response = await fetch("b2auth.php");
+
                 let authData = await response.json();
                 if (!authData.authorizationToken) throw "Erreur d'authentification";
 
@@ -177,9 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Étape 3 : Lire le fichier en blob
                 let file = await fetch(filePath);
                 let blob = await file.blob();
-                console.log( uploadData.uploadUrl)
-
-                console.log( uploadData.authorizationToken)
+                console.log( uploadData)
                 // Étape 4 : Upload du fichier
 
                
@@ -199,10 +197,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 let filePath = hlsFolder + file; // Chemin local du fichier
                                 let cloudPath = file; // Garde la structure d'origine
 
-                                console.log(`Envoi du fichier : ${filePath} => ${cloudPath}`);
+
+                                let checkExist = await fetch("check_file_exists.php", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                authToken: authData.authorizationToken,
+                                apiUrl: authData.apiUrl,
+                                bucketId:authData.bucketId,
+                                bucketName: "fullrencontre-hls",
+                                fileName: hlsFolder+cloudPath
+                                })
+                                });
+
+                                let checkResult = await checkExist.json();
+
+                                
+                                if (checkResult.exists) {
+                                console.log(`⏭️ Fichier ${cloudPath} déjà présent, on passe.`);
+
+                                let percent = ((index + 1) / totalFiles) * 100;
+                                document.getElementById("uploadProgress").value = percent;
+                                document.getElementById("progressText").textContent = Math.round(percent) + "%";
+
+                                console.log(percent)
+
+                                continue; // skip
+                                }
 
 
-                            
+                                
                                 let fileBlob = await fetch(filePath).then(res => res.blob());
 
                                 let formData = new FormData();
@@ -228,6 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 document.getElementById("progressText").textContent = Math.round(percent) + "%";
 
                                 console.log(percent)
+                                
 
                         }
                      
@@ -242,7 +267,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 const urlParams = new URLSearchParams(window.location.search);
                                 const filmID = urlParams.get("filmID");
                                
-                                window.location.href = "http://localhost:3040/set_serie?filmID=" +filmID + "&hlsFolder="+hlsFolder+"&type=Serie&season=" +season+ "&episode="+episode;
+                                window.location.href = "https://belleckflix.com/set_serie?filmID=" +filmID + "&hlsFolder="+hlsFolder+"&type=Serie&season=" +season+ "&episode="+episode;
 
                                  /*
                                   try {
@@ -287,7 +312,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 const filmID = urlParams.get("filmID");
 
                                
-                                window.location.href = "http://localhost:3040/set_film?filmID=" +filmID + "&hlsFolder="+hlsFolder+"&type=Film";
+                                window.location.href = "https://belleckflix.com/set_film?filmID=" +filmID + "&hlsFolder="+hlsFolder+"&type=Film";
  
                                 /*
                                

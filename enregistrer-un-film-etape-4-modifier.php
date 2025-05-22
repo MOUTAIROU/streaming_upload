@@ -39,10 +39,10 @@ $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
                         <option value="Horreur">horreur</option>
                         <option value="Musical">musical</option>
                         <option value="Mystère">mystère</option>
-                        <option value="Policer">policer</option>
+                        <option value="Policier">policier</option>
                         <option value="Science-fiction">science-fiction</option>
                         <option value="Thriller">thriller</option>
-                        <option value="Wertern">wertern</option>
+                        <option value="Wertern">western</option>
                     </select><br><br>
 
                     <label for="scenes">Scènes :</label><br>
@@ -70,10 +70,10 @@ $myVar = getenv("NOM_VARIABLE"); // Ou $_ENV["MY_ENV_VAR"]
                                 <div><input type="checkbox" id="scene4" name="scenes[]" value="Musical"> Musical<br></div>
                                 <div><input type="checkbox" id="scene4" name="scenes[]" value="Mystère"> Mystère<br></div>
                                 <div><input type="checkbox" id="scene4" name="scenes[]" value="Romance"> Romance<br></div>
-                                <div><input type="checkbox" id="scene4" name="scenes[]" value="Policer"> Policer<br></div>
+                                <div><input type="checkbox" id="scene4" name="scenes[]" value="Policier"> Policier<br></div>
                                 <div><input type="checkbox" id="scene4" name="scenes[]" value="Science-fiction">Science-fiction<br></div>
                                 <div><input type="checkbox" id="scene4" name="scenes[]" value="Thriller"> Thriller<br></div>
-                                <div><input type="checkbox" id="scene4" name="scenes[]" value="Wertern"> Wertern<br></div>
+                                <div><input type="checkbox" id="scene4" name="scenes[]" value="Western"> Western<br></div>
                            </div>
                     </div>
 
